@@ -1,0 +1,16 @@
+.artworkWrapper {
+  margin: 0 auto;
+  padding: 20px 0;
+  border-bottom: 1px solid #cacaca;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.artworkWrapper:last-child {
+  border-bottom: 0;
+}
+
+.artistDisplay {
+  white-space: pre-line;
+}
