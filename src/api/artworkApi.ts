@@ -7,8 +7,14 @@ interface IArtworkResponse {
   }
 }
 
-interface IAllArtworkResponse extends IArtworkResponse {
+export interface IAllArtworkResponse extends IArtworkResponse {
   data: IArtworkResponseDto[]
+  pagination: {
+    current_page: number;
+    prev_url: string
+    next_url: string;
+    offset: number
+  }
 }
 
 interface IOneArtworkResponse extends IArtworkResponse {
@@ -27,15 +33,17 @@ export interface IArtworkResponseDto {
   title: string
 }
 
-const artworkClient = axios.create({
-  baseURL: 'https://api.artic.edu/api/v1'
-})
+const baseURL = 'https://api.artic.edu/api/v1';
+const artworkClient = axios.create({ baseURL })
 
 export const artworkApi = {
-  async getAll() {
-    const {data} = await artworkClient.get<IAllArtworkResponse>('/artworks')
+  async getAll(pageUrl: null | string) {
+    const {data} = await artworkClient.get<IAllArtworkResponse>(pageUrl ? pageUrl.replace(baseURL, '') : '/artworks')
+    console.log('data: ', data)
 
-    return data ? transformResponseDtoToViewDto(data.data, data.config) : []
+    return data 
+      ? {data: transformResponseDtoToViewDto(data.data, data.config), paging: data.pagination}
+      : {data: [], paging: null}
   },
 
   async getById(id: number) {

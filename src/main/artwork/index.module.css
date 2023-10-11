@@ -1,3 +1,13 @@
+.container {
+  margin: 0 auto;
+  width: 80%;
+}
+
+.container h2 {
+  text-align: center;
+  text-decoration: underline;
+}
+
 .artworkWrapper {
   margin: 0 auto;
   padding: 20px 0;
@@ -7,10 +17,31 @@
   align-items: center;
 }
 
+.artworkWrapper img {
+  margin-bottom: 10px;
+}
+
 .artworkWrapper:last-child {
   border-bottom: 0;
 }
 
 .artistDisplay {
   white-space: pre-line;
+}
+
+.mainBtn {
+  background-color: #65AAF3;
+  border: 0;
+  border-radius: 7px;
+  color: white;
+  padding: 10px 25px;
+  margin: 0 5px;
+}
+
+.pagingWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 10px 0;
 }

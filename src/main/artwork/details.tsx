@@ -38,7 +38,7 @@ export function ArtworkDetail() {
 
   return (
     <div>
-      <h2>Artwork Details</h2>
+      <h2 className={styles.title}>Artwork Details</h2>
       {artwork && (
         <div>
           <Header artwork={artwork} />
