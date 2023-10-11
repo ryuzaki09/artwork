@@ -7,6 +7,7 @@ import {
   IAllArtworkResponse
 } from "../../api/artworkApi";
 import { StoreArtworksAction } from "../../store/actions/artwork";
+import {useSelector} from 'react-redux'
 
 import styles from "./index.module.css";
 
@@ -15,16 +16,23 @@ export function Artwork() {
   const [pagination, setPagination] = useState<
     IAllArtworkResponse["pagination"] | null
   >(null);
+  const {artworks, paging} = useSelector(({artwork}) => artwork)
+
   const fetchArtwork = async (pageUrl: string | null = null) => {
     const { data, paging } = await artworkApi.getAll(pageUrl);
 
     setAllArtwork(data);
-    StoreArtworksAction(data);
+    StoreArtworksAction(data, paging);
     setPagination(paging);
   };
 
   useEffect(() => {
-    fetchArtwork();
+    if (artworks.length > 0) {
+      setAllArtwork(artworks)
+      setPagination(paging)
+    } else {
+      fetchArtwork();
+    }
   }, []);
 
   const handlePreviousPage = () => {

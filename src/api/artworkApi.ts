@@ -39,7 +39,6 @@ const artworkClient = axios.create({ baseURL })
 export const artworkApi = {
   async getAll(pageUrl: null | string) {
     const {data} = await artworkClient.get<IAllArtworkResponse>(pageUrl ? pageUrl.replace(baseURL, '') : '/artworks')
-    console.log('data: ', data)
 
     return data 
       ? {data: transformResponseDtoToViewDto(data.data, data.config), paging: data.pagination}
